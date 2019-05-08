@@ -82,7 +82,7 @@ const removeNote = function (title) {
 // how to export multiple things at once
 
 module.exports = {
-  getNotes: getNotes,
+  // getNotes: getNotes,
   addNote: addNote,
   removeNote: removeNote
 }
