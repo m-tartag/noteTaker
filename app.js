@@ -23,7 +23,7 @@ yargs.command({
   },
   handler: function (argv) {
     notes.addNote(argv.title, argv.body)
-    console.log(chalk.green.inverse('Adding a new note!'))
+    // console.log(chalk.green.inverse('Adding a new note!'))
     // console.log('Title: ' + argv.title)
     // console.log('Body: ' + argv.body)
   }
