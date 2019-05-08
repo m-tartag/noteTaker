@@ -1,11 +1,31 @@
 const fs = require('fs')
 
 
-// Get Notes Function
+// Reusable Functions
 
-const getNotes = function () {
-  return 'Your notes...'
+// Load notes from file using fs
+
+const loadNotes = function () {
+  try {
+    const dataBuffer = fs.readFileSync('notes.json')
+    const dataJSON = dataBuffer.toString()
+    return JSON.parse(dataJSON)
+
+  } catch (e) {
+    return []
+  }
 }
+
+// Save notes function
+
+const saveNotes = function (notes) {
+  const dataJSON = JSON.stringify(notes)
+  fs.writeFileSync('notes.json', dataJSON)
+}
+
+
+// Add/Remove Functions
+
 
 // Add Notes Function
 
@@ -28,26 +48,41 @@ const addNote = function (title, body) {
 
 }
 
-const saveNotes = function (notes) {
-  const dataJSON = JSON.stringify(notes)
-  fs.writeFileSync('notes.json', dataJSON)
-}
+// Remove Notes Function 
 
-const loadNotes = function () {
-  try {
-    const dataBuffer = fs.readFileSync('notes.json')
-    const dataJSON = dataBuffer.toString()
-    return JSON.parse(dataJSON)
+const removeNote = function (title) {
 
-  } catch (e) {
-    return []
-  }
+  const notes = loadNotes()
+  const notesToKeep = notes.filter(function (note) {
+    return note.title !== title
+  })
+  saveNotes(notesToKeep)
 }
 
 
 
-// exporting object with 2 properties
+
+
+
+
+
+
+
+
+// Get Notes Function
+
+
+// const getNotes = function () {
+//   return 'Your notes...'
+// }
+
+
+
+
+// how to export multiple things at once
+
 module.exports = {
   getNotes: getNotes,
-  addNote: addNote
+  addNote: addNote,
+  removeNote: removeNote
 }
